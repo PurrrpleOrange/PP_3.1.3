@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+
+<div style="display:flex; justify-content: space-between; align-items:center;">
+    <h1>Users</h1>
+
+    <form th:action="@{/logout}" method="post" style="margin:0;">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+<a th:href="@{/admin/new}">Create new user</a>
+
+<table border="1" cellpadding="5">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Roles</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="u : ${users}">
+        <td th:text="${u.id}"></td>
+        <td th:text="${u.username}"></td>
+
+        <!-- роли через запятую -->
+        <td>
+      <span th:each="r, st : ${u.roles}">
+        <span th:text="${r.name}"></span><span th:if="${!st.last}">, </span>
+      </span>
+        </td>
+
+        <td>
+            <a th:href="@{/admin/edit(id=${u.id})}">Edit</a>
+            |
+            <a th:href="@{/admin/delete/{id}(id=${u.id})}"
+               onclick="return confirm('Delete this user?');">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

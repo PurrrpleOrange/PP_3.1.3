@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User form</title>
+</head>
+<body>
+
+<div style="display:flex; justify-content: space-between; align-items:center;">
+    <h1>User form</h1>
+
+    <form th:action="@{/logout}" method="post" style="margin:0;">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+<form th:action="@{/admin/save}" th:object="${user}" method="post">
+
+    <input type="hidden" th:field="*{id}"/>
+
+    <label>Username:
+        <input type="text" th:field="*{username}" required>
+    </label>
+
+    <br/><br/>
+
+    <div>
+        <strong>Roles:</strong><br/>
+
+        <div th:each="r : ${allRoles}">
+            <label>
+                <input type="checkbox"
+                       name="roleIds"
+                       th:value="${r.id}"
+                       th:checked="${user.roles != null and user.roles.contains(r)}"/>
+                <span th:text="${r.name}"></span>
+            </label>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+
+    <label>Password:
+        <input type="password" name="rawPassword" placeholder="Leave blank to keep current password">
+    </label>
+
+    <br/><br/>
+
+
+    <button type="submit">Save</button>
+</form>
+
+<br/>
+<a th:href="@{/admin}">Back to list</a>
+
+</body>
+</html>
