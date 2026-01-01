@@ -1,5 +1,8 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -40,7 +43,15 @@
     <div class="row">
         <aside class="col-2 p-0 sidebar">
             <nav class="nav flex-column pt-3">
+                <a class="nav-link px-3"
+                   sec:authorize="hasRole('ADMIN')"
+                   th:href="@{/admin}">
+                    Admin
+                </a>
+
                 <a class="nav-link active px-3" th:href="@{/user}">User</a>
+
+
             </nav>
         </aside>
 
