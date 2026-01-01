@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
+import jakarta.transaction.Transactional;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;

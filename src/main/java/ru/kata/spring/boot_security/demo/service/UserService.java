@@ -9,4 +9,7 @@ public interface UserService {
     public User findById(Long id);
     public User save(User user);
     public void deleteById(Long id);
+    public void saveUser(User user,
+                         List<Long> roleIds,
+                         String rawPassword);
 }
